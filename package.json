@@ -1,0 +1,26 @@
+{
+  "name": "devops-node-mongo-base",
+  "version": "1.0.0",
+  "description": "Base Node.js and MongoDB project for DevOps deployment practice",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "mongodb",
+    "docker",
+    "devops",
+    "ci-cd"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongoose": "^8.15.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
