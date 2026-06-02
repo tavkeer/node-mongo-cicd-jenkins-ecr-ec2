@@ -8,7 +8,6 @@ pipeline {
         IMAGE_TAG = "${BUILD_NUMBER}"
         IMAGE_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}"
 
-        PROD_SERVER_IP = ''
         PROD_APP_DIR = '/home/ubuntu/devops-node-mongo-base'
         SSH_TARGET = 'ubuntu@13.206.223.80'
 
