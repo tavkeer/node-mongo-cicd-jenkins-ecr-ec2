@@ -54,31 +54,21 @@ stage('Deploy with Docker Compose') {
     steps {
         sshagent(credentials: ['production-server-ssh']) {
             sh """
-                ssh -o StrictHostKeyChecking=no ${SSH_TARGET} "mkdir -p ${PROD_APP_DIR}"
-
+                ssh -o StrictHostKeyChecking=no ${SSH_TARGET} 'mkdir -p ${PROD_APP_DIR}'
                 scp -o StrictHostKeyChecking=no docker-compose.yml ${SSH_TARGET}:${PROD_APP_DIR}/docker-compose.yml
-
-                ssh -o StrictHostKeyChecking=no ${SSH_TARGET} <<EOF
-set -e
-cd ${PROD_APP_DIR}
-
-cat > .env <<EOT
-IMAGE_URI=${IMAGE_URI}
-IMAGE_TAG=${IMAGE_TAG}
-APP_PORT=${APP_PORT}
-MONGO_URI=${MONGO_URI}
-EOT
-
-aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
-docker compose pull
-docker compose up -d
-EOF
+                ssh -o StrictHostKeyChecking=no ${SSH_TARGET} '
+                    set -e
+                    cd ${PROD_APP_DIR}
+                    printf "IMAGE_URI=${IMAGE_URI}\nIMAGE_TAG=${IMAGE_TAG}\nAPP_PORT=${APP_PORT}\nMONGO_URI=${MONGO_URI}\n" > .env
+                    aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+                    docker compose pull
+                    docker compose up -d
+                '
             """
         }
     }
-}
-
-    post {
+}    
+post {
         success {
             echo "Pipeline completed successfully. Deployed image tag: ${IMAGE_TAG}"
         }
