@@ -81,7 +81,7 @@ async function connectWithRetry() {
     if (!serverStarted) {
       app.listen(PORT, () => {
         serverStarted = true;
-        console.log(`Server is listening on port ${PORT}`);
+        console.log(`New Server is listening on port ${PORT}`);
       });
     }
   } catch (error) {
