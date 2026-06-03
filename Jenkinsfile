@@ -9,7 +9,7 @@ pipeline {
         IMAGE_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}"
 
         PROD_APP_DIR = '/home/ubuntu/devops-node-mongo-base'
-        SSH_TARGET = 'ubuntu@13.206.223.80'
+        SSH_TARGET = 'ubuntu@13.201.83.138'
 
         APP_PORT = '3000'
         MONGO_URI = 'mongodb://mongo:27017/devopsapp'

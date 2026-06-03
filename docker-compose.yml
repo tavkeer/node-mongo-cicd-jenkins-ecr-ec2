@@ -1,6 +1,6 @@
 services:
   app:
-    image: ${IMAGE_URI}:${IAGE_TAG}
+    image: ${IMAGE_URI}:${IMAGE_TAG}
     container_name: node-mongo-app
     ports:
       - "${APP_PORT}:3000"
